@@ -7,7 +7,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailNotificationServiceImpl implements EmailNotificationService {
     @Override
-    public void sendReservationRequestNotification(NotificationData notificationData) {
+    public void sendReservationRequestedNotification(NotificationData notificationData) {
         // TODO: Send email
+        System.out.println("Email sent: " + notificationData.toString());
+    }
+
+    @Override
+    public void sendReservationProcessedNotification(NotificationData notificationData) {
+        // TODO: Send email
+        System.out.println("Email sent: " + notificationData.toString());
     }
 }
