@@ -1,9 +1,11 @@
 package elsys.emailnotificationapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record NotificationData(
     @JsonProperty String uuid,
     @JsonProperty String propertyUuid,
@@ -13,6 +15,5 @@ public record NotificationData(
     @JsonProperty LocalDate checkOut,
     @JsonProperty int guests,
     @JsonProperty Float totalPrice,
-    @JsonProperty String status,
     @JsonProperty String comment
 ) { }

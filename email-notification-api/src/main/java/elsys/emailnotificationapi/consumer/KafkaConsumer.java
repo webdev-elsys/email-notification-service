@@ -15,23 +15,48 @@ public class KafkaConsumer {
     private final EmailNotificationService emailNotificationService;
 
     @KafkaListener(
-        topics = "${kafka.reservation-request-topic}",
+        topics = "${kafka.reservation-pending-topic}",
         groupId = "${kafka.group-id}",
         containerFactory = "notificationDataKafkaListenerContainerFactory"
     )
     public void handleReservationRequest(String message) throws JsonProcessingException {
-        NotificationData notificationData = deserializeNotificationData(message);
-        emailNotificationService.sendReservationRequestedNotification(notificationData);
+        emailNotificationService.sendReservationRequestedNotification(deserializeNotificationData(message));
     }
 
     @KafkaListener(
-        topics = "${kafka.reservation-process-topic}",
+        topics = "${kafka.reservation-confirmed-topic}",
         groupId = "${kafka.group-id}",
         containerFactory = "notificationDataKafkaListenerContainerFactory"
     )
-    public void handleReservationProcess(String message) throws JsonProcessingException {
-        NotificationData notificationData = deserializeNotificationData(message);
-        emailNotificationService.sendReservationRequestedNotification(notificationData);
+    public void handleReservationConfirmed(String message) throws JsonProcessingException {
+        emailNotificationService.sendReservationConfirmedNotification(deserializeNotificationData(message));
+    }
+
+    @KafkaListener(
+        topics = "${kafka.reservation-rejected-topic}",
+        groupId = "${kafka.group-id}",
+        containerFactory = "notificationDataKafkaListenerContainerFactory"
+    )
+    public void handleReservationRejected(String message) throws JsonProcessingException {
+        emailNotificationService.sendReservationRejectedNotification(deserializeNotificationData(message));
+    }
+
+    @KafkaListener(
+        topics = "${kafka.reservation-cancelled-topic}",
+        groupId = "${kafka.group-id}",
+        containerFactory = "notificationDataKafkaListenerContainerFactory"
+    )
+    public void handleReservationCancelled(String message) throws JsonProcessingException {
+        emailNotificationService.sendReservationCancelledNotification(deserializeNotificationData(message));
+    }
+
+    @KafkaListener(
+        topics = "${kafka.reservation-completed-topic}",
+        groupId = "${kafka.group-id}",
+        containerFactory = "notificationDataKafkaListenerContainerFactory"
+    )
+    public void handleReservationCompleted(String message) throws JsonProcessingException {
+        emailNotificationService.sendReservationCompletedNotification(deserializeNotificationData(message));
     }
 
     private NotificationData deserializeNotificationData(String message) throws JsonProcessingException {

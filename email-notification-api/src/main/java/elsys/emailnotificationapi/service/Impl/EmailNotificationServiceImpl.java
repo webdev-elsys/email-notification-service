@@ -13,7 +13,25 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
     }
 
     @Override
-    public void sendReservationProcessedNotification(NotificationData notificationData) {
+    public void sendReservationConfirmedNotification(NotificationData notificationData) {
+        // TODO: Send email
+        System.out.println("Email sent: " + notificationData.toString());
+    }
+
+    @Override
+    public void sendReservationRejectedNotification(NotificationData notificationData) {
+        // TODO: Send email
+        System.out.println("Email sent: " + notificationData.toString());
+    }
+
+    @Override
+    public void sendReservationCancelledNotification(NotificationData notificationData) {
+        // TODO: Send email
+        System.out.println("Email sent: " + notificationData.toString());
+    }
+
+    @Override
+    public void sendReservationCompletedNotification(NotificationData notificationData) {
         // TODO: Send email
         System.out.println("Email sent: " + notificationData.toString());
     }
